@@ -14,6 +14,13 @@ environment:
     packages:
       - alpine-baselayout-data
       - busybox
+      - musl-dev 
+      - gcc 
+      - cmake 
+      - make 
+      - libtool 
+      - libc6-compat 
+      - pcre-dev  
       - wget
       - tar
       - cmake 
