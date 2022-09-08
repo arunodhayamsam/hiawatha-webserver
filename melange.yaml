@@ -1,0 +1,43 @@
+  
+package:
+  name: hiawatha-webserver
+  version: 11.1
+  description: "hiawatha"
+  target-architecture:
+    - amd64
+environment:
+  contents:
+    repositories:
+      - https://dl-cdn.alpinelinux.org/alpine/edge/main
+      - http://dl-cdn.alpinelinux.org/alpine/v3.8/main
+      - http://dl-cdn.alpinelinux.org/alpine/v3.8/community
+    packages:
+      - alpine-baselayout-data
+      - busybox
+      - wget
+      - tar
+      - cmake 
+      - make 
+      - musl-dev 
+      - libxml2-dev 
+      - libxslt-dev 
+      - util-linux 
+      - php7-json 
+      - php7-fpm
+
+  accounts:
+    groups:
+      - groupname: nginx
+        gid: 10000
+    users:
+      - username: nginx
+        uid: 10000
+
+pipeline:
+  - runs: |
+      wget https://www.hiawatha-webserver.org/files/hiawatha-11.1.tar.gz
+      tar -xzf hiawatha-11.1.tar.gz
+      cd hiawatha-11.1
+      mkdir build && cd build
+      cmake ..
+      sudo make install/strip

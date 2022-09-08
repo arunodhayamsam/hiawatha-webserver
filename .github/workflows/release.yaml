@@ -32,6 +32,15 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
+    - uses: chainguard-dev/actions/melange-build@main
+      with:
+        sign-with-temporary-key: true
+        config: melange.yaml
+        empty-workspace: true
+        archs: x86_64,aarch64,armv7
+#        template: "{\"Version\": \"${{ matrix.nginx-version }}\", \"SHA\": \"${{ matrix.sha256 }}\"}"
+
+
     - id: apko
       uses: distroless/actions/apko-snapshot@main
       with:
