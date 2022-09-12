@@ -43,16 +43,26 @@ environment:
 pipeline:
   - uses: git-checkout
     with:
-      repository: https://gitlab.com/hsleisink/hiawatha.git
+      repository: https://github.com/ajayvarma-ittrident/hiawatha
       branch: master
   - uses: cmake/configure
   - uses: cmake/build
   - uses: cmake/install
-  - uses: strip    
-  - name: Create directory    
-    run: |
-       cd hiawatha
-       mkdir -p build && cd build
-       cmake ..
-       make install/strip 
+  - uses: strip          
+
+#pipeline:
+#  - uses: git-checkout
+#    with:
+#      repository: https://gitlab.com/hsleisink/hiawatha.git
+#      branch: master
+#  - uses: cmake/configure
+#  - uses: cmake/build
+#  - uses: cmake/install
+#  - uses: strip    
+#  - name: Create directory    
+#    run: |
+#       cd hiawatha
+#       mkdir -p build && cd build
+#       cmake ..
+#       make install/strip 
    

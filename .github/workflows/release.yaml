@@ -48,25 +48,25 @@ jobs:
         image_refs: apko.images
         base-tag: ghcr.io/${{ github.repository }}
 
-    - name: Emit Image Refs output
-      id: emit-refs
-      run: |
-        cat apko.images | sed 's/$/\n/g' | grep -v '^$' | jq -R -s -c 'split("\n")[:-1]' | jq .
-        echo ::set-output name=image-refs::$(cat apko.images | sed 's/$/\n/g' | grep -v '^$' | jq -R -s -c 'split("\n")[:-1]')
-
-    # Post to slack when things fail.
-    - if: ${{ failure() }}
-      uses: rtCamp/action-slack-notify@v2.2.0
-      env:
-        SLACK_ICON: http://github.com/chainguardian.png?size=48
-        SLACK_USERNAME: chainguardian
-        SLACK_WEBHOOK: ${{ secrets.DISTROLESS_SLACK_WEBHOOK }}
-        SLACK_CHANNEL: distroless-alerts
-        SLACK_COLOR: '#8E1600'
-        MSG_MINIMAL: 'true'
-        SLACK_TITLE: Releasing ${{ github.repository }} failed.
-        SLACK_MESSAGE: |
-          For detailed logs: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
+#    - name: Emit Image Refs output
+#      id: emit-refs
+#      run: |
+#        cat apko.images | sed 's/$/\n/g' | grep -v '^$' | jq -R -s -c 'split("\n")[:-1]' | jq .
+#        echo ::set-output name=image-refs::$(cat apko.images | sed 's/$/\n/g' | grep -v '^$' | jq -R -s -c 'split("\n")[:-1]')
+#
+#    # Post to slack when things fail.
+#    - if: ${{ failure() }}
+#      uses: rtCamp/action-slack-notify@v2.2.0
+#      env:
+#        SLACK_ICON: http://github.com/chainguardian.png?size=48
+#        SLACK_USERNAME: chainguardian
+#        SLACK_WEBHOOK: ${{ secrets.DISTROLESS_SLACK_WEBHOOK }}
+#        SLACK_CHANNEL: distroless-alerts
+#        SLACK_COLOR: '#8E1600'
+#        MSG_MINIMAL: 'true'
+#        SLACK_TITLE: Releasing ${{ github.repository }} failed.
+#        SLACK_MESSAGE: |
+#          For detailed logs: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
 
   scan:
     name: Scan apko images
