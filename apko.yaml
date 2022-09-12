@@ -8,11 +8,11 @@ contents:
     - alpine-baselayout-data
     - binutils
     - busybox
-    - hiawatha
+    - nginx
     - ssl_client
     - openssh-client
     
 #work-dir: /var/
 
 entrypoint:
-  command: hiawatha -k
+  command: /usr/sbin/nginx -c  -g "daemon off;"
