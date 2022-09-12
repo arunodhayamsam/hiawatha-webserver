@@ -49,9 +49,6 @@ pipeline:
   - uses: cmake/build
   - uses: cmake/install
   - uses: strip    
-  - uses: jwlawson/actions-setup-cmake@v1.12
-    with:
-      cmake-version: '3.3.0'
   - name: Create directory    
     run: |
        cd hiawatha
